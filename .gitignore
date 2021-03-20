@@ -1,3 +1,4 @@
 # Project exclude paths
 /target/
 *.properties
+.DS_Store
