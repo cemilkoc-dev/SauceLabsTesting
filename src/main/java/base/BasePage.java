@@ -55,8 +55,10 @@ public class BasePage {
                 default:
                     throw new RuntimeException("Browser is not supported!");
             }
+
             capabilities.setCapability("browserVersion", properties.getProperty("browserVersion"));
             capabilities.setCapability("platformName", properties.getProperty("platformName"));
+            capabilities.setCapability("sauce:options", setSauceOptions());
             threadLocalDriver.set(new RemoteWebDriver(new URL(URL), capabilities));
 
         } else {
@@ -104,5 +106,15 @@ public class BasePage {
             System.out.println(getDriver());
             getDriver().quit();
         }
+    }
+
+
+    private MutableCapabilities setSauceOptions() {
+        MutableCapabilities sauceOptions = new MutableCapabilities();
+        sauceOptions.setCapability("seleniumVersion", "3.141.59");
+        sauceOptions.setCapability("name", "Sauce Lab Demo test");
+        sauceOptions.setCapability("build", "test123");
+        sauceOptions.setCapability("public", "private");
+        return sauceOptions;
     }
 }
